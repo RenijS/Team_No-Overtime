@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>HalleyAssist home page</title>
+        <style>
+            .centered {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            }
+            .bottomright {
+            position: fixed;
+            top: 100%;
+            left: 100%;
+            transform: translate(-100%, -100%);
+        }
+            .topright {
+            position: fixed;
+            left: 100%;
+            transform: translate(-100%, -100%);
+        }
+        </style>
+    </head>
+    <img src="halleyassist.PNG"></img>
+    <div class="topright">
+        <input type="text">
+    </div>
+
+    <div align="center">
+        <span id="time"> </span><br>
+    </div>
+
+    <div class="centered">
+        <button type="button" style="background-color:palegreen">Contact</button>
+        <button type="button" style="background-color:palegreen">Reminder</button><br>
+        <button type="button" style="background-color:palegreen">Settings</button>
+        <button type="button" style="background-color:palegreen">Help</button><br>
+    </div>
+
+    <div class="bottomright">
+        <button type="button" style="background-color:cornflowerblue; color:white">Quick SOS</button>
+    </div>
+    <script src="time.js">   </script>
+</html>
