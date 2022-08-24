@@ -1,0 +1,103 @@
+html {
+  height: 100%;
+  line-height: 1.6;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100%;
+  font-size: 70%;
+}
+
+.notifSection {
+  min-width: 600px;
+}
+
+.switch {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.addSection button {
+  background-color: #b9d6f2;
+}
+
+.active {
+  background-color: #b9d6f2;
+  transition: background-color 300ms linear;
+}
+
+button {
+  width: 45%;
+  margin: auto;
+  border: 1px solid gray;
+  border-radius: 8px;
+}
+
+button,
+input {
+  font-size: 1.3em;
+  padding: 0.5em 0;
+}
+
+button:active {
+  box-shadow: 2px 2px 5px steelblue;
+}
+
+.addWrapper {
+  background-color: rgb(232, 232, 232);
+}
+
+.addSection {
+  width: 70%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+
+#title {
+  width: 80%;
+}
+
+.dateSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 80%;
+}
+
+.start,
+.end {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.start {
+  border-right: 1px black solid;
+  padding-right: 1rem;
+}
+
+.end {
+  border-left: 1px black solid;
+  padding-left: 1rem;
+}
+
+.noteSection {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.displayGone {
+  display: none;
+}

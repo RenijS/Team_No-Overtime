@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main</title>
+    <link rel="stylesheet" href="/css/reminder.css" />
+  </head>
+  <body>
+    <h2>Main Page</h2>
+    <section class="notifSection">
+      <div class="switch">
+        <button id="addSwitch" class="active">Add Reminder</button>
+        <button id="upcomingSwitch">Upcoming Reminder</button>
+      </div>
+      <section class="addWrapper">
+        <section class="addSection">
+          <input type="text" placeholder="title" id="title" />
+          <div class="dateSection">
+            <div class="start">
+              <span>Start</span>
+              <input type="datetime-local" name="startTime" id="startTime" />
+            </div>
+            <div class="end">
+              <span>End</span>
+              <input type="datetime-local" name="endTime" id="endTime" />
+            </div>
+          </div>
+          <div class="noteSection">
+            <span>Notes</span>
+            <textarea name="notes" id="notes" cols="30" rows="5"></textarea>
+          </div>
+          <button id="addBtn">Add</button>
+        </section>
+      </section>
+      <section class="upcomingSection displayGone">
+        <div>
+          <ul class="upcomingList"></ul>
+        </div>
+      </section>
+    </section>
+
+    <!--JS-->
+    <script src="js/reminder.js"></script>
+  </body>
+</html>
