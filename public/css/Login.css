@@ -16,6 +16,19 @@
     background-color: rgb(189, 106, 103);
     column-gap: 30px;
 }
+.indexContainer {
+    display: flex;
+    justify-content: end;
+  } 
+  .indexBtn {
+    padding: 0.4rem 2rem;
+    border-radius: 10px;
+    background-color: palegreen;
+    font-weight: bold;
+  }
+  button:hover {
+    cursor: pointer;
+  } 
 .form{
     position: absolute;
     max-width: 430px;

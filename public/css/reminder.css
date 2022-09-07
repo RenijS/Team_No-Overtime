@@ -9,7 +9,21 @@ body {
   min-height: 100%;
   font-size: 70%;
 }
-
+.indexContainer {
+  width: 45%;
+  display: flex;
+  justify-content: end;
+  padding: 1rem 2rem;
+}
+.indexBtn {
+  padding: 0.4rem 2rem;
+  border-radius: 10px;
+  background-color: palegreen;
+  font-weight: bold;
+}
+button:hover {
+  cursor: pointer;
+}
 .notifSection {
   min-width: 600px;
 }
@@ -45,7 +59,9 @@ input {
 button:active {
   box-shadow: 2px 2px 5px steelblue;
 }
-
+button, .indexBtn {
+  width: 100%;
+}
 .addWrapper {
   background-color: rgb(232, 232, 232);
 }
