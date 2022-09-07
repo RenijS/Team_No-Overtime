@@ -101,3 +101,7 @@ button:active {
 .displayGone {
   display: none;
 }
+
+button:hover {
+  cursor: pointer;
+}
