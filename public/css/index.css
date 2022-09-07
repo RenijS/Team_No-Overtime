@@ -1,8 +1,13 @@
 .centered {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+}
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
 }
 .bottomright {
   position: fixed;
@@ -31,4 +36,10 @@
 
 button:hover {
   cursor: pointer;
+}
+
+.gridContainer button {
+  width: 10em;
+  padding: 1em 0.5em;
+  font-weight: bold;
 }
