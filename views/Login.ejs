@@ -17,15 +17,19 @@
                     <div class="indexContainer">
                         <a href="/"><button class="indexBtn">Back to Homepage</button></a>
                     </div>
+                    <div class="msgContainer <%if(typeof message == "undefined"){%> <%="displayGone"%> <%}%>"
+                        <%if(typeof status != "undefined"){%> data-status = <%=status%> <%}%>> 
+                        <p class="msg"><%if(typeof message != "undefined"){%> <%=message%> <%}%></p>
+                    </div>
                     <div class="form-content">
                         <header>Login</header>
-                        <form action="#">
+                        <form action="/login" method="post">
                             <div class="field input-field">
-                                <input type="email" placeholder="Email" class="input">
+                                <input type="email" placeholder="Email" class="input" name="email">
                             </div>
     
                             <div class="field input-field">
-                                <input type="password" placeholder="Password" class="password">
+                                <input type="password" placeholder="Password" class="password" name="password">
                                 <i class='bx bx-hide eye-icon'></i>
                             </div>
     
@@ -61,7 +65,7 @@
     
                 </div>
 
-            </div>
+            </section>
 
                 <!-- Singup Form -->
 
@@ -71,17 +75,20 @@
                     </div>
                     <div class="form-content">
                         <header>Signup</header>
-                        <form action="#">
+                        <form action="/register" method="post">
                             <div class="field input-field">
-                                <input type="email" placeholder="Email" class="input">
+                                <input type="text" placeholder="Name" class="input" name="name">
+                            </div>
+                            <div class="field input-field">
+                                <input type="email" placeholder="Email" class="input" name="email">
                             </div>
     
                             <div class="field input-field">
-                                <input type="password" placeholder="Create password" class="password">
+                                <input type="password" placeholder="Create password" class="password" name="password">
                             </div>
     
                             <div class="field input-field">
-                                <input type="password" placeholder="Confirm password" class="password">
+                                <input type="password" placeholder="Confirm password" class="password" name="re-password">
                                 <i class='bx bx-hide eye-icon'></i>
                             </div>
     
