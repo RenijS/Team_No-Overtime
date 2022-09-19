@@ -63,21 +63,23 @@ app.post("/login", async (req, res) => {
   console.log(req.body);
   const { email, password } = req.body;
   const user = User.findOne({ email })
-    .then((user) => {
+    .then(async (user) => {
       if (!user) {
         const msg = "User doesn't exists";
         console.log(msg);
         res.render("login", { status: "error", message: msg });
       } else {
-        if (bcrypt.compare(password, user.password)) {
+        if (await bcrypt.compare(password, user.password)) {
           const token = jwt.sign(
             { id: user._id, email: user.email },
             process.env.JWT_SECRET
           );
-          res.cookie("token", token, { expires: new Date(Date.now() + 365) });
+          res.cookie("jwtToken", token, {
+            path: "/",
+          });
           console.log("Success token: ", token);
           console.log("Decoded token: ", jwt.decode(token));
-          res.render("index", { user, token });
+          res.redirect("/");
         } else {
           const msg = "Password is incorrect";
           console.log(msg);
@@ -88,6 +90,12 @@ app.post("/login", async (req, res) => {
     .catch((err) => {
       console.log("Error: ", err);
     });
+});
+
+app.get("/signout", (req, res) => {
+  res.clearCookie("jwtToken", { path: "/" });
+  res.render("index");
+  console.log("User signout successful");
 });
 
 app.get("/contact", (req, res) => {
