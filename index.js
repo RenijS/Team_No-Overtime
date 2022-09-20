@@ -115,8 +115,13 @@ app.get("/contact", (req, res) => {
 });
 
 app.get("/reminder", (req, res) => {
-  const token = req.cookies.jwtToken;
-  res.render("reminder", { id: token.id });
+  const cookie = req.cookies.jwtToken;
+  if (cookie == undefined) {
+    res.render("reminder");
+  } else {
+    const token = jwt.decode(cookie);
+    res.render("reminder", { id: token.id });
+  }
 });
 
 app.listen(port, () => {
