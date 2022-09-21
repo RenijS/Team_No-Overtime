@@ -41,15 +41,10 @@ button:hover {
 
 .gridContainer button {
   width: 10em;
-  padding: 2em 0.5em;
+  padding: 1em 0.5em;
   font-weight: bold;
 }
 
 .displayGone {
   display: none;
-}
-
-.textColour {
-  font-weight: bold;
-  color: white;
 }
