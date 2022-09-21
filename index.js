@@ -10,9 +10,6 @@ require("dotenv").config();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const cookieParser = require("cookie-parser");
-app.use(cookieParser());
-
 app.use(express.static(path.join(__dirname, "public")));
 //ejs
 app.set("views", path.join(__dirname, "views"));
@@ -41,31 +38,25 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/register", async (req, res) => {
-  const { name, email, password, repassword } = req.body;
-  if (repassword == password) {
-    const hPassword = await bcrypt.hash(password, 10);
+  const { name, email, password } = req.body;
+  const hPassword = await bcrypt.hash(password, 10);
 
-    let user = new User({
-      name,
-      email,
-      password: hPassword,
+  let user = new User({
+    name,
+    email,
+    password: hPassword,
+  });
+
+  user
+    .save()
+    .then((user) => {
+      const msg = "User saved successfully";
+      console.log(msg, user);
+      res.render("Login", { status: "success", message: msg });
+    })
+    .catch((err) => {
+      console.log("Registration error: ", err);
     });
-
-    user
-      .save()
-      .then((user) => {
-        const msg = "User saved successfully";
-        console.log(msg, user);
-        res.render("Login", { status: "success", message: msg });
-      })
-      .catch((err) => {
-        console.log("Registration error: ", err);
-      });
-  } else {
-    const msg = "Password didn't match, try again";
-    console.log(msg);
-    res.render("Login", { status: "error", message: msg });
-  }
 });
 
 app.post("/login", async (req, res) => {
@@ -92,7 +83,7 @@ app.post("/login", async (req, res) => {
         } else {
           const msg = "Password is incorrect";
           console.log(msg);
-          res.render("Login", { status: "error", message: msg });
+          res.render("login", { status: "error", message: msg });
         }
       }
     })
@@ -108,20 +99,11 @@ app.get("/signout", (req, res) => {
 });
 
 app.get("/contact", (req, res) => {
-  console.log("==================");
-  const token = req.cookies.jwtToken;
-  console.log(jwt.decode(token));
   res.render("Contact");
 });
 
 app.get("/reminder", (req, res) => {
-  const cookie = req.cookies.jwtToken;
-  if (cookie == undefined) {
-    res.render("reminder");
-  } else {
-    const token = jwt.decode(cookie);
-    res.render("reminder", { id: token.id });
-  }
+  res.render("reminder");
 });
 
 app.listen(port, () => {
