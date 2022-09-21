@@ -27,8 +27,14 @@
   padding: 1rem 2rem;
 }
 
+.voiceContainer {
+  display: flex;
+  flex-direction: row;
+}
+
 .loginBtn,
-.signoutBtn {
+.signoutBtn,
+.voiceBtn {
   padding: 0.4rem 2rem;
   border-radius: 10px;
   background-color: palegreen;
@@ -52,4 +58,9 @@ button:hover {
 .textColour {
   font-weight: bold;
   color: white;
+}
+
+.voiceActivated {
+  box-shadow: rgba(255, 68, 68, 0.5) 0px 0px 0px 1px,
+    rgba(255, 69, 69, 0.7) 0px 0px 0px 3px;
 }
