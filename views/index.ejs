@@ -4,30 +4,35 @@
         <title>HalleyAssist home page</title>
         <link rel="stylesheet" href="/css/index.css">
     </head>
-    <img src="/images/halleyassist.PNG" style="width: 60px;"></img>
-    <div class="topright">
-        <input type="text">
-    </div>
-    <div class="loginContainer">
-        <a href="/login"><button class="loginBtn">Login / Signup</button></a>
-        <a href="/signout"> <button class="signoutBtn displayGone">Signout</button></a>
-    </div>
-    <div style="text-align: center;">
-        <span id="time"> </span><br>
-    </div>
-
-    <div class="centered">
-        <div class="gridContainer">
-            <a href="/contact"><button type="button" style="background-color:palegreen">Contact</button></a>
-            <a href="/reminder"><button type="button" style="background-color:palegreen">Reminder</button></a>
-            <a href=""><button type="button" style="background-color:palegreen">Settings</button></a>
-            <a href=""><button type="button" style="background-color:palegreen">Help</button></a>
+    <body style="background-color:black;">
+        <img src="/images/halleyassist.PNG" style="width: 60px;"></img>
+        <div class="topright">
+            <input type="text">
         </div>
-    </div>
-
-    <div class="bottomright">
-        <button type="button" style="background-color:cornflowerblue; color:white">Quick SOS</button>
-    </div>
-    <script src="/js/time.js">   </script>
-    <script src="/js/landingJS.js"></script>
+        <div class="loginContainer">
+            <a href="/login"><button class="loginBtn" style="font-size: 40px; font-weight: bold;">Login / Signup</button></a>
+            <a href="/signout"> <button class="signoutBtn displayGone">Signout</button></a>
+        </div>
+        <div style="text-align: center;">
+            <span id="time"> </span><br>
+        </div>
+    
+        <div class="centered">
+            <div class="gridContainer">
+                <a href="/contact"><button type="button" style="background-color:palegreen; font-size: 50px; border-radius: 20px;">Contact</button></a>
+                <a href="/reminder"><button type="button" style="background-color:palegreen; font-size: 50px; border-radius: 20px;">Reminder</button></a>
+                <a href=""><button type="button" style="background-color:palegreen; font-size: 50px; border-radius: 20px;">Settings</button></a>
+                <a href=""><button type="button" style="background-color:palegreen; font-size: 50px; border-radius: 20px;">Help</button></a>
+            </div>
+        </div>
+    
+        <div class="bottomright">
+            <button type="button" style="background-color:cornflowerblue; color:white; font-size: 75px; font-weight: bold;">Quick SOS</button>
+        </div>
+        <div class="textColour">
+            <script src="/js/time.js"></script>
+        </div>
+        
+        <script src="/js/landingJS.js"></script>
+    </body>
 </html>
