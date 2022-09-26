@@ -10,6 +10,7 @@ require("dotenv").config();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+const methodOverride = require("method-override");
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
@@ -17,6 +18,7 @@ app.use(express.static(path.join(__dirname, "public")));
 //ejs
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+app.use(methodOverride("_method"));
 //for post
 app.use(express.urlencoded({ extended: true }));
 
@@ -122,6 +124,43 @@ app.get("/reminder", (req, res) => {
     const token = jwt.decode(cookie);
     res.render("reminder", { id: token.id });
   }
+});
+
+app.get("/settings", (req, res) => {
+  res.render("settings");
+});
+
+app.get("/profile", async (req, res) => {
+  const token = req.cookies.jwtToken;
+  const userInfo = {
+    id: "",
+    name: "",
+    dob: "",
+    phone: "",
+  };
+  if (token != undefined) {
+    const tokenDecoded = jwt.decode(token);
+    const user = await User.findOne({ _id: tokenDecoded.id });
+    userInfo = {
+      id: user._id,
+      name: user.name,
+      dob: user.dob.toISOString().split("T")[0],
+      phone: user.phone,
+    };
+  }
+  res.render("profile", {
+    user: userInfo,
+  });
+});
+
+app.put("/update/profile/:id", async (req, res) => {
+  const { id } = req.params;
+  const updatedUser = await User.findByIdAndUpdate(id, req.body, {
+    runValidators: true,
+  })
+    .then((user) => console.log(`updated user: ${user}`))
+    .catch((err) => console.log(err));
+  res.redirect("/profile");
 });
 
 app.listen(port, () => {
