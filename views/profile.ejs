@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link rel="stylesheet" href="/css/profile.css">
+  </head>
+  <body>
+    <section class="container">
+            <div class="indexContainer">
+                <a href="/"><button class="indexBtn">Back to Homepage</button></a>
+            </div>
+            <div class="mainContainer">
+                <header>Profile <%=user.id%> <%=user.dob%></header>
+                <form  action="/update/profile/<%=user.id%>?_method=PUT" method="post">
+                    <div class="field input-field">
+                        <label for="name">Name: </label>
+                        <input type="text" placeholder="name" class="input" name="name" id="name" value="<%=user.name%>" required>
+                    </div>
+                    <div class="field input-field">
+                        <label for="dob">DOB: </label>
+                        <input type="date" placeholder="date of birth" class="input" name="dob" id="dob" value="<%=user.dob%>">
+                    </div>
+                    <div class="field input-field">
+                        <label for="phone">Phone: </label>
+                        <input type="tel" placeholder="phone number" class="input" name="phone" id="phone" value="<%=user.phone%>">
+                    </div>
+                    <div class="field button-field displayGone">
+                        <button class="saveBtn ">Save</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </section>
+
+    <script src="/js/profile.js"></script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  background-color: rgba(0, 0, 0, 0.705);
+}
+
+.mainContainer {
+  max-width: 430px;
+  width: 100%;
+  padding: 30px;
+  border-radius: 6px;
+  background-color: white;
+}
+
+.field {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  height: 30px;
+}
+
+.field button {
+  background-color: #0171d3;
+  color: #ffff;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 0.4rem 0;
+}
+
+.indexBtn {
+  padding: 0.4rem 2rem;
+  border-radius: 10px;
+  background-color: palegreen;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  height: 100%;
+}
+
+button {
+  width: 80%;
+}
+
+button:hover,
+input:hover,
+label:hover {
+  cursor: pointer;
+}
+
+label {
+  width: 3.5rem;
+  padding-right: 0.5rem;
+}
+
+.displayGone {
+  display: none;
+}
