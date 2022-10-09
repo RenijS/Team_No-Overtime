@@ -5,6 +5,7 @@ const path = require("path");
 
 const mongoose = require("mongoose");
 const User = require("./models/User");
+const Reminder = require("./models/Reminder");
 require("dotenv").config();
 
 const bcrypt = require("bcryptjs");
@@ -122,7 +123,13 @@ app.get("/reminder", (req, res) => {
     res.render("reminder");
   } else {
     const token = jwt.decode(cookie);
-    res.render("reminder", { id: token.id });
+    const reminders = Reminder.find({ userId: token.id })
+      .then((reminders) => {
+        res.render("reminder", { id: token.id, reminders });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 });
 
@@ -161,6 +168,22 @@ app.put("/update/profile/:id", async (req, res) => {
     .then((user) => console.log(`updated user: ${user}`))
     .catch((err) => console.log(err));
   res.redirect("/profile");
+});
+
+app.post("/add/reminder", async (req, res) => {
+  const cookie = req.cookies.jwtToken;
+  if (cookie != undefined) {
+    const token = jwt.decode(cookie);
+    const { title, remindDate, notes } = req.body;
+    let reminder = new Reminder({ userId: token.id, title, remindDate, notes });
+    reminder
+      .save()
+      .then((reminder) => {
+        console.log("Reminder saved", reminder);
+        res.redirect("/reminder");
+      })
+      .catch((err) => console.log("Error: ", err));
+  }
 });
 
 app.listen(port, () => {

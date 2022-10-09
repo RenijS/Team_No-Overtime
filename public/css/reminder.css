@@ -32,6 +32,7 @@ button:hover {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  gap: 1rem;
 }
 
 .addSection button {
@@ -59,7 +60,9 @@ input {
 button:active {
   box-shadow: 2px 2px 5px steelblue;
 }
-button, .indexBtn {
+button,
+.indexBtn,
+input {
   width: 100%;
 }
 .addWrapper {
@@ -89,23 +92,11 @@ button, .indexBtn {
   width: 80%;
 }
 
-.start,
-.end {
+.start {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   padding: 0.5rem 0;
-}
-
-.start {
-  border-right: 1px black solid;
-  padding-right: 1rem;
-}
-
-.end {
-  border-left: 1px black solid;
-  padding-left: 1rem;
+  width: 80%;
 }
 
 .noteSection {
@@ -118,6 +109,11 @@ button, .indexBtn {
   display: none;
 }
 
-button:hover {
+label {
+  font-size: 1.3em;
+}
+
+button:hover,
+label:hover {
   cursor: pointer;
 }

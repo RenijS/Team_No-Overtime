@@ -10,7 +10,7 @@
   <body>
     <div class="indexContainer">
       <a href="/"><button class="indexBtn">Back to Homepage</button></a>
-  </div>
+    </div>
     <h2>Reminder Page</h2>
     <section class="notifSection">
       <div class="switch">
@@ -18,31 +18,32 @@
         <button id="upcomingSwitch">Upcoming Reminder</button>
       </div>
       <section class="addWrapper">
-        <section class="addSection">
-          <input type="text" placeholder="title" id="title" />
-          <div class="dateSection">
-            <div class="start">
-              <span>Start</span>
-              <input type="datetime-local" name="startTime" id="startTime" />
-            </div>
-            <div class="end">
-              <span>End</span>
-              <input type="datetime-local" name="endTime" id="endTime" />
-            </div>
+        <form class="addSection" action="/add/reminder" method="post">
+          <input type="text" placeholder="title" id="title" name="title" />
+          <div class="start">
+            <label for="remindDate">Date/Time</label>
+            <input type="datetime-local" name="remindDate" id="remindDate" />
           </div>
           <div class="noteSection">
-            <span>Notes</span>
+            <label for="notes">Notes</label>
             <textarea name="notes" id="notes" cols="30" rows="5"></textarea>
           </div>
           <button id="addBtn">Add</button>
-        </section>
+        </form>
       </section>
       <section class="upcomingSection displayGone">
         <div>
-          <ul class="upcomingList"></ul>
+          <ul class="upcomingList">
+            <%if(typeof reminders != "undefined"){%> <%for(let reminder of
+            reminders){%>
+            <li>
+              <p><%=reminder.title%></p>
+              <p><%=reminder.remindDate%></p>
+            </li>
+            <%}%> <%}%>
+          </ul>
         </div>
       </section>
-      
     </section>
 
     <!--JS-->

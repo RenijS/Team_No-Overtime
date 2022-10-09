@@ -5,43 +5,43 @@ const upcomingSection = document.querySelector(".upcomingSection");
 const addBtn = document.querySelector("#addBtn");
 const upcomingList = document.querySelector(".upcomingList");
 
-const storage = [];
-storage.push(createEvent("test1", "2022-08-09T14:45", "2022-08-09T14:45"));
+// const storage = [];
+// storage.push(createEvent("test1", "2022-08-09T14:45", "2022-08-09T14:45"));
 
-function createEvent(title, startDate, endDate, notes) {
-  return {
-    title: title,
-    startDate: startDate,
-    endDate: endDate,
-    notes: notes,
-    getTitle() {
-      return title;
-    },
-    getStartDate() {
-      return startDate;
-    },
-    getEndDate() {
-      return endDate;
-    },
-    getNotes() {
-      return notes;
-    },
-  };
-}
+// function createEvent(title, startDate, endDate, notes) {
+//   return {
+//     title: title,
+//     startDate: startDate,
+//     endDate: endDate,
+//     notes: notes,
+//     getTitle() {
+//       return title;
+//     },
+//     getStartDate() {
+//       return startDate;
+//     },
+//     getEndDate() {
+//       return endDate;
+//     },
+//     getNotes() {
+//       return notes;
+//     },
+//   };
+// }
 
-const loadReminder = () => {
-  upcomingList.innerHTML = "";
-  for (let event of storage) {
-    let newLi = document.createElement("li");
-    let newP = document.createElement("p");
-    let newP2 = document.createElement("p");
-    newP.textContent = `${event.getTitle()}`;
-    newP2.textContent = `${event.getStartDate()} - ${event.getEndDate()}`;
-    newLi.appendChild(newP);
-    newLi.appendChild(newP2);
-    upcomingList.appendChild(newLi);
-  }
-};
+// const loadReminder = () => {
+//   upcomingList.innerHTML = "";
+//   for (let event of storage) {
+//     let newLi = document.createElement("li");
+//     let newP = document.createElement("p");
+//     let newP2 = document.createElement("p");
+//     newP.textContent = `${event.getTitle()}`;
+//     newP2.textContent = `${event.getStartDate()} - ${event.getEndDate()}`;
+//     newLi.appendChild(newP);
+//     newLi.appendChild(newP2);
+//     upcomingList.appendChild(newLi);
+//   }
+// };
 
 function inactiveBtn() {}
 
@@ -51,7 +51,7 @@ upcomingSwitch.addEventListener("click", (e) => {
     addSection.classList.add("displayGone");
     addSwitch.classList.remove("active");
     upcomingSwitch.classList.add("active");
-    loadReminder();
+    // loadReminder();
   }
 });
 
