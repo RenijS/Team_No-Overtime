@@ -23,6 +23,9 @@ app.use(methodOverride("_method"));
 //for post
 app.use(express.urlencoded({ extended: true }));
 
+const nodemailer = require("nodemailer");
+const corn = require("node-cron");
+
 mongoose
   .connect(process.env.DATABASE, {
     useNewUrlParser: true,
@@ -139,7 +142,7 @@ app.get("/settings", (req, res) => {
 
 app.get("/profile", async (req, res) => {
   const token = req.cookies.jwtToken;
-  const userInfo = {
+  let userInfo = {
     id: "",
     name: "",
     dob: "",
@@ -151,9 +154,17 @@ app.get("/profile", async (req, res) => {
     userInfo = {
       id: user._id,
       name: user.name,
-      dob: user.dob.toISOString().split("T")[0],
+      dob: "",
       phone: user.phone,
     };
+    if (user.dob != undefined) {
+      userInfo = {
+        id: user._id,
+        name: user.name,
+        dob: user.dob.toISOString().split("T")[0],
+        phone: user.phone,
+      };
+    }
   }
   res.render("profile", {
     user: userInfo,
@@ -174,12 +185,48 @@ app.post("/add/reminder", async (req, res) => {
   const cookie = req.cookies.jwtToken;
   if (cookie != undefined) {
     const token = jwt.decode(cookie);
+    const user = await User.findOne({ _id: token.id });
     const { title, remindDate, notes } = req.body;
+    const remDate = new Date(remindDate);
+    const cronDate = `${remDate.getMinutes()} ${remDate.getHours()} ${remDate.getDate()} ${
+      remDate.getMonth() + 1
+    } ${remDate.getDay()}`;
+    //email reminder
+    //email config
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.SENDER_EMAIL,
+        pass: process.env.SENDER_PASSWORD,
+      },
+      tls: {
+        rejectUnauthorized: false,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.SENDER_EMAIL,
+      to: user.email,
+      subject: `Reminder ${title}`,
+      text: `This is your reminder for ${title} \n ${notes}`,
+    };
+
     let reminder = new Reminder({ userId: token.id, title, remindDate, notes });
     reminder
       .save()
       .then((reminder) => {
         console.log("Reminder saved", reminder);
+
+        corn.schedule(cronDate, () => {
+          transporter.sendMail(mailOptions, (err, info) => {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log("Email send: " + info.response);
+            }
+          });
+        });
+
         res.redirect("/reminder");
       })
       .catch((err) => console.log("Error: ", err));
