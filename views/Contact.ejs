@@ -7,47 +7,39 @@
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-                     
-            }
+            transform: translate(-50%, -50%);             
+        }
             .bottomright {
             position: fixed;
             top: 100%;
             left: 100%;
             transform: translate(-100%, -100%);
         }
-       
-            
             .topright {
-            position: fixed;
-            left: 100%;
-            transform: translate(-100%, -100%);
+            display: flex;
+            justify-content: end;
+            padding: 1rem 2rem;
         }
-        
-          
+            .gridContainer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+        }
         </style>
     </head>
-    
-    <div class="indexContainer">
-        <a href="/"><img src="images/LeftArrowSymbol.png"></img></a>
-    </div>
-    
-    <div class="topleft">
-        
-        <a href=”javascript: history.back(-1);”></a>
-    </div>
-
-    <div class="centered">
-        <button type="button" style="background-color:#CCEEFF">Call Caretaker</button>
-        <button type="button" style="background-color:#98FB98; width: 90px">Add Contact</button><br>
-        <button type="button" style="background-color:#CCEEFF; width: 101px">Call SOS </button>
-        <button type="button" style="background-color:#98FB98;width: 90px">Favourites</button><br>
-        <button type="button" style="background-color:#CCEEFF; width: 101px">Call Guardian</button>
-       <button type="button" style="background-color:#98FB98;width: 90px">Others</button><br>
-    </div>
-
-    <div class="bottomright">
-        <button type="button" style="background-color:#87CEFA; color:white">SOS</button>
-    </div>
-     
+    <body style="background-color: black;">
+        <div class="topright">
+            <a href="/"><button type="button" style="background-color:palegreen; font-size: 50px; border-radius: 20px;">Back to Homepage</button></a>
+        </div>
+        <div class="centered">
+            <div class="gridContainer">
+                <a href=""><button type="button" style="background-color:lightcyan; font-size: 50px; border-radius: 20px;">Call Caretaker</button></a>
+                <a href=""><button type="button" style="background-color:palegreen; font-size: 50px; border-radius: 20px;">Add Contact</button></a>
+                <a href=""><button type="button" style="background-color:lightcyan; font-size: 50px; border-radius: 20px;">Call Guardian</button></a>
+                <a href=""><button type="button" style="background-color:palegreen; font-size: 50px; border-radius: 20px;">Favourites</button></a>
+                <a href=""><button type="button" style="background-color:lightcyan; font-size: 50px; border-radius: 20px;">Call SOS</button></a>
+                <a href=""><button type="button" style="background-color:palegreen; font-size: 50px; border-radius: 20px;">Others</button></a>
+            </div>
+        </div>
+    </body>
 </html>
