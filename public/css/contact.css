@@ -1,0 +1,28 @@
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rem;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+
+.topright {
+  position: fixed;
+  left: 100%;
+  transform: translate(-100%, -100%);
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.gridContainer button {
+  width: 10em;
+  padding: 2em 0.5em;
+  font-weight: bold;
+}
