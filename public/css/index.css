@@ -58,6 +58,7 @@ button:hover {
 .textColour {
   font-weight: bold;
   color: white;
+  font-size: x-large;
 }
 
 .voiceActivated {
