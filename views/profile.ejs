@@ -24,8 +24,15 @@
                         <input type="date" placeholder="date of birth" class="input" name="dob" id="dob" value="<%=user.dob%>">
                     </div>
                     <div class="field input-field">
-                        <label for="phone">Phone: </label>
-                        <input type="tel" placeholder="phone number" class="input" name="phone" id="phone" value="<%=user.phone%>">
+                        <label for="phone">Phone:</label>
+                        <span>+61</span>
+                    <input type="tel" placeholder="phone number" class="input" name="phone" id="phone" value="<%=user.phone%>">
+                        
+                    </div>
+                    <div class="field input-field">
+                        <label for="sosContact">SOS Contact:</label>
+                        <span>+61</span>
+                        <input type="tel" placeholder="phone number" class="input" name="sosContact" id="sosContact" value="<%=user.sosContact%>">
                     </div>
                     <div class="field button-field displayGone">
                         <button class="saveBtn ">Save</button>

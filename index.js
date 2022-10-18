@@ -6,6 +6,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const User = require("./models/User");
 const Reminder = require("./models/Reminder");
+const Contact = require("./models/Contact");
 require("dotenv").config();
 
 const bcrypt = require("bcryptjs");
@@ -37,6 +38,10 @@ mongoose
   .catch((err) => {
     console.log("Mongo ERROR: ", err);
   });
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require("twilio")(accountSid, authToken);
 
 app.get("/", (req, res) => {
   res.render("index");
@@ -113,11 +118,22 @@ app.get("/signout", (req, res) => {
   console.log("User signout successful");
 });
 
-app.get("/contact", (req, res) => {
-  console.log("==================");
-  const token = req.cookies.jwtToken;
-  console.log(jwt.decode(token));
-  res.render("Contact");
+app.get("/contact", async (req, res) => {
+  const cookie = req.cookies.jwtToken;
+  if (cookie != undefined) {
+    const token = jwt.decode(cookie);
+    const contact = await Contact.find({ userId: token.id })
+      .then((contact) => {
+        console.log("Contact found", contact);
+        res.render("Contact", { contact });
+      })
+      .catch((err) => {
+        console.log("error: ", err);
+      });
+  } else {
+    console.log("Login please");
+    res.redirect("/");
+  }
 });
 
 app.get("/reminder", (req, res) => {
@@ -147,6 +163,7 @@ app.get("/profile", async (req, res) => {
     name: "",
     dob: "",
     phone: "",
+    sosContact: "",
   };
   if (token != undefined) {
     const tokenDecoded = jwt.decode(token);
@@ -156,6 +173,7 @@ app.get("/profile", async (req, res) => {
       name: user.name,
       dob: "",
       phone: user.phone,
+      sosContact: user.sosContact,
     };
     if (user.dob != undefined) {
       userInfo = {
@@ -163,8 +181,10 @@ app.get("/profile", async (req, res) => {
         name: user.name,
         dob: user.dob.toISOString().split("T")[0],
         phone: user.phone,
+        sosContact: user.sosContact,
       };
     }
+    console.log(userInfo);
   }
   res.render("profile", {
     user: userInfo,
@@ -173,6 +193,7 @@ app.get("/profile", async (req, res) => {
 
 app.put("/update/profile/:id", async (req, res) => {
   const { id } = req.params;
+  console.log(req.body);
   const updatedUser = await User.findByIdAndUpdate(id, req.body, {
     runValidators: true,
   })
@@ -230,6 +251,90 @@ app.post("/add/reminder", async (req, res) => {
         res.redirect("/reminder");
       })
       .catch((err) => console.log("Error: ", err));
+  }
+});
+
+app.post("/sms/sos", async (req, res) => {
+  console.log("SOS Button Clicked");
+  const token = req.cookies.jwtToken;
+  if (token != undefined) {
+    const tokenDecoded = jwt.decode(token);
+    const user = await User.findOne({ _id: tokenDecoded.id });
+    if (user.sosContact != undefined) {
+      client.messages
+        .create({
+          body: `SOS Message!, \n ${user.name} requires help \n please check the status of sender`,
+          from: process.env.TWILIO_PHONE_NUM,
+          to: `+61${user.sosContact}`,
+        })
+        .then((message) => console.log(message.sid))
+        .catch((err) => console.log(err));
+      res.redirect("/");
+    } else {
+      console.log("Error", "please enter sos contact number");
+      res.redirect("/profile");
+    }
+  } else {
+    res.redirect("/login");
+  }
+});
+
+app.post("/sms/msg", async (req, res) => {
+  const token = req.cookies.jwtToken;
+  const { numOpt, msg } = req.body;
+  if (token != undefined) {
+    const tokenDecoded = jwt.decode(token);
+    const user = await User.findOne({ _id: tokenDecoded.id });
+
+    client.messages
+      .create({
+        body: `Message from ${user.name}, \n "${msg}"`,
+        from: process.env.TWILIO_PHONE_NUM,
+        to: `+61${numOpt}`,
+      })
+      .then((message) => {
+        console.log("message sent", message.sid);
+        res.redirect("/contact");
+      })
+      .catch(async (err) => {
+        console.log("Err", err);
+        const contact = await Contact.find({ userId: token.id })
+          .then((contact) => {
+            console.log("contact search");
+            if (err.status === 400) {
+              const msg = "Error, invalid phone number.";
+              res.render("Contact", { contact, status: "error", message: msg });
+            } else {
+              const msg = "Error, please try again";
+              res.render("Contact", { contact, status: "error", message: msg });
+            }
+          })
+          .catch((err) => {
+            console.log("Contact error: ", err);
+          });
+      });
+  } else {
+    res.redirect("/login");
+  }
+});
+
+app.post("/add/contact", (req, res) => {
+  const cookie = req.cookies.jwtToken;
+  if (cookie != undefined) {
+    const token = jwt.decode(cookie);
+    const { name, phone } = req.body;
+    console.log(req.body);
+    console.log(token.id, name, phone);
+    let contact = new Contact({ userId: token.id, name, phone });
+    contact
+      .save()
+      .then((contact) => {
+        console.log("Contact saved:", contact);
+        res.redirect("/contact");
+      })
+      .catch((err) => console.log(err));
+  } else {
+    console.log("Please login");
   }
 });
 

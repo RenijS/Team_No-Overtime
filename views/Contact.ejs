@@ -1,22 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>HalleyAssist Contact Screen</title>
-        <link rel="stylesheet" href="/css/contact.css">
-    </head>
-    <body style="background-color: black;">
-        <div class="topright">
-            <a href="/"><button type="button" style="background-color:palegreen; font-size: 50px; border-radius: 20px; font-weight: bold;">Back to Homepage</button></a>
-        </div>
-        <div class="centered">
-            <div class="gridContainer">
-                <a href=""><button type="button" style="background-color:lightcyan; font-size: 50px; border-radius: 20px;">Call Caretaker</button></a>
-                <a href=""><button type="button" style="background-color:palegreen; font-size: 50px; border-radius: 20px;">Add Contact</button></a>
-                <a href=""><button type="button" style="background-color:lightcyan; font-size: 50px; border-radius: 20px;">Call Guardian</button></a>
-                <a href=""><button type="button" style="background-color:palegreen; font-size: 50px; border-radius: 20px;">Favourites</button></a>
-                <a href=""><button type="button" style="background-color:lightcyan; font-size: 50px; border-radius: 20px;">Call SOS</button></a>
-                <a href=""><button type="button" style="background-color:palegreen; font-size: 50px; border-radius: 20px;">Others</button></a>
+  <head>
+    <title>HalleyAssist Contact Screen</title>
+    <link rel="stylesheet" href="/css/contact.css" />
+  </head>
+  <body style="background-color: black">
+    <section class="wholeSection">
+      <a href="/"
+        ><button
+          type="button"
+          style="
+            background-color: palegreen;
+            border-radius: 8px;
+            font-weight: bold;
+          "
+        >
+          Back to Homepage
+        </button></a
+      >
+      <div class="msgContainer <%if(typeof message == "undefined"){%> <%="displayGone"%> <%}%>"
+        <%if(typeof status != "undefined"){%> data-status = <%=status%> <%}%>> 
+        <p class="msg"><%if(typeof message != "undefined"){%> <%=message%> <%}%></p>
+    </div>
+      <section class="mainSection">
+        <form action="/sms/msg" method="post" class="smsSection">
+          <div class="input-field toField">
+            <label for="numOpt">To:</label>
+            <select name="numOpt" id="numOpt">
+              <%for(let c of contact){%>
+              <option value="<%=c.phone%>"><%=c.name%> - <%=c.phone%></option>
+              <%}%>
+            </select>
+          </div>
+          <div class="input-field msgField">
+            <label for="msg">Message:</label>
+            <textarea name="msg" id="msg" cols="40" rows="8" required></textarea>
+          </div>
+          <div class="input-field">
+            <button type="submit" id="submitBtn">Send</button>
+          </div>
+        </form>
+        <div class="addSection displayGone">
+          <form class="addSection" action="/add/contact" method="post">
+            <div class="input-field nameField">
+              <label for="name">Name: </label>
+              <input type="text" placeholder="name" id="name" name="name" required/>
             </div>
+            <div class="input-field numField">
+              <label for="phone">Phone:</label>
+              <input
+                type="tel"
+                name="phone"
+                id="phone"
+                placeholder="phone number"
+                minlength="9"
+                maxlength="10"
+                required
+              />
+            </div>
+            <div class="input-field">
+              <button id="submitBtn">Add</button>
+            </div>
+          </form>
         </div>
-    </body>
+        <div class="viewSection displayGone">
+          <ul class="contactList">
+            <%if(typeof contact != "undefined"){%> <%for(let c of contact){%>
+            <li>
+              <span><%=c.name%>: </span>
+              <span> <%=c.phone%></span>
+              <button class="listBtn">Delete</button>
+            </li>
+            <%}%> <%}%>
+          </ul>
+        </div>
+      </section>
+      <section class="buttonSection">
+        <button class="smsBtn active">Send SMS</button>
+        <button class="addBtn">Add Contact</button>
+        <button class="viewBtn">View Contact</button>
+      </section>
+    </section>
+    <script src="js/contact.js"></script>
+  </body>
 </html>
