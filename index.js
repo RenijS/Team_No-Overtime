@@ -132,7 +132,7 @@ app.get("/contact", async (req, res) => {
       });
   } else {
     console.log("Login please");
-    res.redirect("/");
+    res.redirect("/login");
   }
 });
 
