@@ -1,28 +1,117 @@
-.centered {
+html,
+body {
+  min-height: 100%;
+}
+body {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: white;
+}
+.wholeSection {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 10rem;
+  margin-bottom: 4rem;
+  width: 100%;
 }
 
-.gridContainer {
+.smsSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttonSection {
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5rem;
 }
 
-.topright {
-  position: fixed;
-  left: 100%;
-  transform: translate(-100%, -100%);
+.input-field,
+.buttonSection {
+  margin-top: 1rem;
 }
 
-button:hover {
+.msgField {
+  display: flex;
+  flex-direction: column;
+}
+
+#numOpt {
+  font-size: large;
+}
+
+button {
+  width: 100%;
+  margin: auto;
+  border: 1px solid gray;
+  border-radius: 8px;
+}
+
+button,
+input {
+  font-size: 1.3em;
+  padding: 0.5em 0;
+}
+
+button:active {
+  box-shadow: 2px 2px 5px steelblue;
+}
+
+button:hover,
+label:hover {
   cursor: pointer;
 }
 
-.gridContainer button {
-  width: 10em;
-  padding: 2em 0.5em;
+#submitBtn {
+  background-color: #b9d6f2;
+}
+
+.active {
+  background-color: #b9d6f2;
+  transition: background-color 300ms linear;
+}
+
+label {
+  font-size: 1.3em;
+}
+
+li {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+}
+
+.listBtn {
+  height: auto;
+  width: auto;
+  font-size: small;
   font-weight: bold;
+  background-color: rgba(255, 0, 0, 0.708);
+  color: aliceblue;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.msgContainer {
+  text-align: center;
+  border: 0.1px black solid;
+  border-radius: 8px;
+  padding: 0.5rem 0;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
+.displayGone {
+  display: none;
 }
