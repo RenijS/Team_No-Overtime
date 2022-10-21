@@ -181,10 +181,13 @@ app.get("/profile", async (req, res) => {
       };
     }
     console.log(userInfo);
+    res.render("profile", {
+      user: userInfo,
+    });
+  } else {
+    const msg = "Login is required";
+    res.render("Login", { status: "error", message: msg });
   }
-  res.render("profile", {
-    user: userInfo,
-  });
 });
 
 app.put("/update/profile/:id", async (req, res) => {
