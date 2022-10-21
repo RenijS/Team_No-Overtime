@@ -131,8 +131,8 @@ app.get("/contact", async (req, res) => {
         console.log("error: ", err);
       });
   } else {
-    console.log("Login please");
-    res.redirect("/login");
+    const msg = "Login is required";
+    res.render("Login", { status: "error", message: msg });
   }
 });
 
@@ -150,10 +150,6 @@ app.get("/reminder", (req, res) => {
         console.log(err);
       });
   }
-});
-
-app.get("/settings", (req, res) => {
-  res.render("settings");
 });
 
 app.get("/profile", async (req, res) => {
@@ -251,6 +247,9 @@ app.post("/add/reminder", async (req, res) => {
         res.redirect("/reminder");
       })
       .catch((err) => console.log("Error: ", err));
+  } else {
+    const msg = "Login is required";
+    res.render("Login", { status: "error", message: msg });
   }
 });
 
@@ -275,7 +274,8 @@ app.post("/sms/sos", async (req, res) => {
       res.redirect("/profile");
     }
   } else {
-    res.redirect("/login");
+    const msg = "Login is required";
+    res.render("Login", { status: "error", message: msg });
   }
 });
 
@@ -334,7 +334,8 @@ app.post("/add/contact", (req, res) => {
       })
       .catch((err) => console.log(err));
   } else {
-    console.log("Please login");
+    const msg = "Login is required";
+    res.render("Login", { status: "error", message: msg });
   }
 });
 

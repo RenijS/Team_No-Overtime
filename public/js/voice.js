@@ -23,6 +23,12 @@ recognition.onresult = (event) => {
     window.location.href = "/contact";
   } else if (voiceInput == "go to reminder") {
     window.location.href = "/reminder";
+  } else if (voiceInput == "go to profile") {
+    window.location.href = "/profile";
+  } else if (voiceInput == "refresh" || voiceInput == "go to main") {
+    window.location.href = "/";
+  } else if (voiceInput == "signout") {
+    window.location.href = "/signout";
   }
 };
 
