@@ -53,30 +53,39 @@ app.get("/login", (req, res) => {
 
 app.post("/register", async (req, res) => {
   const { name, email, password, repassword } = req.body;
-  if (repassword == password) {
-    const hPassword = await bcrypt.hash(password, 10);
+  const user = User.findOne({ email })
+    .then(async (user) => {
+      if (!user) {
+        if (repassword == password) {
+          const hPassword = await bcrypt.hash(password, 10);
 
-    let user = new User({
-      name,
-      email,
-      password: hPassword,
+          let user = new User({
+            name,
+            email,
+            password: hPassword,
+          });
+
+          user
+            .save()
+            .then((user) => {
+              const msg = "User saved successfully";
+              res.render("Login", { status: "success", message: msg });
+            })
+            .catch((err) => {
+              console.log("Registration error: ", err);
+            });
+        } else {
+          const msg = "Password didn't match, try again";
+          res.render("Login", { status: "error", message: msg });
+        }
+      } else {
+        const msg = "User already exists";
+        res.render("Login", { status: "error", message: msg });
+      }
+    })
+    .catch((err) => {
+      console.log("Error: ", err);
     });
-
-    user
-      .save()
-      .then((user) => {
-        const msg = "User saved successfully";
-        console.log(msg, user);
-        res.render("Login", { status: "success", message: msg });
-      })
-      .catch((err) => {
-        console.log("Registration error: ", err);
-      });
-  } else {
-    const msg = "Password didn't match, try again";
-    console.log(msg);
-    res.render("Login", { status: "error", message: msg });
-  }
 });
 
 app.post("/login", async (req, res) => {
