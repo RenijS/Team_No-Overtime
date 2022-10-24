@@ -21,7 +21,10 @@ recognition.onresult = (event) => {
     window.location.href = "/login";
   } else if (voiceInput == "go to contact") {
     window.location.href = "/contact";
-  } else if (voiceInput == "go to reminder") {
+  } else if (
+    voiceInput == "go to reminder" ||
+    voiceInput == "go to remainder"
+  ) {
     window.location.href = "/reminder";
   } else if (voiceInput == "go to profile") {
     window.location.href = "/profile";
