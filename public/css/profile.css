@@ -68,6 +68,18 @@ label {
   padding-right: 0.5rem;
 }
 
+.msgContainer {
+  text-align: center;
+  border: 0.1px black solid;
+  border-radius: 8px;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.error {
+  color: red;
+}
+
 .displayGone {
   display: none;
 }

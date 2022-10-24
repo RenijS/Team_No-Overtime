@@ -271,6 +271,22 @@ app.post("/sms/sos", async (req, res) => {
   if (token != undefined) {
     const tokenDecoded = jwt.decode(token);
     const user = await User.findOne({ _id: tokenDecoded.id });
+    let userInfo = {
+      id: user._id,
+      name: user.name,
+      dob: "",
+      phone: user.phone,
+      sosContact: user.sosContact,
+    };
+    if (user.dob != undefined) {
+      userInfo = {
+        id: user._id,
+        name: user.name,
+        dob: user.dob.toISOString().split("T")[0],
+        phone: user.phone,
+        sosContact: user.sosContact,
+      };
+    }
     if (user.sosContact != undefined) {
       client.messages
         .create({
@@ -278,9 +294,19 @@ app.post("/sms/sos", async (req, res) => {
           from: process.env.TWILIO_PHONE_NUM,
           to: `+61${user.sosContact}`,
         })
-        .then((message) => console.log(message.sid))
-        .catch((err) => console.log(err));
-      res.redirect("/");
+        .then((message) => {
+          console.log(message.sid);
+          res.redirect("/");
+        })
+        .catch((err) => {
+          console.log(err);
+          const msg = "SOS contact invalid";
+          res.render("profile", {
+            user: userInfo,
+            status: "error",
+            message: msg,
+          });
+        });
     } else {
       console.log("Error", "please enter sos contact number");
       res.redirect("/profile");
@@ -349,6 +375,16 @@ app.post("/add/contact", (req, res) => {
     const msg = "Login is required";
     res.render("Login", { status: "error", message: msg });
   }
+});
+
+app.delete("/delete/contact", async (req, res) => {
+  const { contactId } = req.body;
+  await Contact.deleteOne({ _id: contactId })
+    .then((contact) => {
+      console.log("Contact Deleted: ", contact);
+      res.redirect("/contact");
+    })
+    .catch((err) => console.log(err));
 });
 
 app.listen(port, () => {

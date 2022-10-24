@@ -27,7 +27,11 @@ recognition.onresult = (event) => {
     window.location.href = "/profile";
   } else if (voiceInput == "refresh" || voiceInput == "go to main") {
     window.location.href = "/";
-  } else if (voiceInput == "signout") {
+  } else if (
+    voiceInput == "signout" ||
+    voiceInput == "sign out" ||
+    voiceInput == "sign-out"
+  ) {
     window.location.href = "/signout";
   }
 };

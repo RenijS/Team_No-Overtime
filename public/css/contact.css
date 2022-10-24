@@ -100,16 +100,16 @@ li {
 
 .msgContainer {
   text-align: center;
-  border: 0.1px black solid;
+  border: 0.1px white solid;
   border-radius: 8px;
-  padding: 0.5rem 0;
+  padding: 0rem 0.5rem;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
   color: green;
 }
 
 .error {
-  color: red;
+  color: rgb(243, 91, 91);
 }
 
 .displayGone {

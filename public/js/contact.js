@@ -6,17 +6,6 @@ const smsSection = document.querySelector(".smsSection");
 const viewSection = document.querySelector(".viewSection");
 const msgContainer = document.querySelector(".msgContainer");
 
-let statusType = msgContainer.dataset.status;
-
-msgStatus(statusType);
-
-//text color changer according to msg type
-function msgStatus(statusType) {
-  if (statusType == "error") {
-    msgContainer.classList.add("error");
-  }
-}
-
 smsBtn.addEventListener("click", () => {
   if (!smsBtn.classList.contains("active")) {
     smsBtn.classList.add("active");

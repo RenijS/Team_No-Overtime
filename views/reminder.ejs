@@ -19,10 +19,21 @@
       </div>
       <section class="addWrapper">
         <form class="addSection" action="/add/reminder" method="post">
-          <input type="text" placeholder="title" id="title" name="title" />
+          <input
+            type="text"
+            placeholder="title"
+            id="title"
+            name="title"
+            required
+          />
           <div class="start">
             <label for="remindDate">Date/Time</label>
-            <input type="datetime-local" name="remindDate" id="remindDate" />
+            <input
+              type="datetime-local"
+              name="remindDate"
+              id="remindDate"
+              required
+            />
           </div>
           <div class="noteSection">
             <label for="notes">Notes</label>

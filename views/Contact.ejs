@@ -18,9 +18,8 @@
           Back to Homepage
         </button></a
       >
-      <div class="msgContainer <%if(typeof message == "undefined"){%> <%="displayGone"%> <%}%>"
-        <%if(typeof status != "undefined"){%> data-status = <%=status%> <%}%>> 
-        <p class="msg"><%if(typeof message != "undefined"){%> <%=message%> <%}%></p>
+      <div class="msgContainer <%if(typeof message == "undefined"){%> <%="displayGone"%> <%}%>"> 
+        <p class="msg error"><%if(typeof message != "undefined"){%> <%=message%> <%}%></p>
     </div>
       <section class="mainSection">
         <form action="/sms/msg" method="post" class="smsSection">
@@ -47,7 +46,7 @@
               <input type="text" placeholder="name" id="name" name="name" required/>
             </div>
             <div class="input-field numField">
-              <label for="phone">Phone:</label>
+              <label for="phone">Phone: +61</label>
               <input
                 type="tel"
                 name="phone"
@@ -69,7 +68,10 @@
             <li>
               <span><%=c.name%>: </span>
               <span> <%=c.phone%></span>
-              <button class="listBtn">Delete</button>
+              <form action="/delete/contact?_method=Delete" method="post">
+                <input type="text" name ="contactId" id = "contactId" value="<%=c._id%>" style="display: none;">
+                <button class="listBtn" type="submit">Delete</button>
+              </form>
             </li>
             <%}%> <%}%>
           </ul>
