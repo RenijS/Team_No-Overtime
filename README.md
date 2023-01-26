@@ -1,6 +1,6 @@
 # Team_No-Overtime
 
-Heroku: <a href = "https://no-overtime-website.herokuapp.com/">Live Preview</a>
+Render: <a href = "https://final-year-project.onrender.com/">Live Preview</a>
 <p>This program is designed with the intention of aiding those who are elderly or impaired by making their day to day lives easier.</p>
 
 <img width="452" alt="Picture1" src="https://user-images.githubusercontent.com/69236889/197700543-b189543a-2c8c-4856-8a5d-80caedbd6fda.png">
